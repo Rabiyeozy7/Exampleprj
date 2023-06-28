@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+
+<style>
+
+    #displayClock{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color:midnightblue;
+        font-family:'Times New Roman', Times, serif;
+        font-style:oblique;
+        font-size: 77px;
+        letter-spacing: 7px;
+        box-shadow: steelblue 3px 8px 3px;
+    }
+
+    body{
+        background-color:aquamarine;
+    }
+    #displayText{
+        position: absolute;
+        top: 35%;
+        left: 55%;
+        transform: translateX(-50%) translateY(-50%);
+        font-family:'Times New Roman', Times, serif;
+        font-style:oblique;
+        font-size: 55px;
+        letter-spacing: 6px;
+        color:teal;
+        box-shadow: steelblue 2px 7px 2px; 
+    }
+    
+</style>
+  
+</head>
+<body>
+     <h1 id="displayText" ><b><i>LIVE TIME</i></b></h1>
+    <div id="displayClock" onload="showTime()"> Time will be here soon...</div> 
+
+<script>
+    function showTime(){
+        //Get time of system;
+        const date = new Date();
+       let h = date.getHours(); //0-23
+       let m = date.getMinutes(); //0-59
+       let s = date.getSeconds(); //0-59
+       //Create a clock which has 12 AM/PM format; 
+       if(h ==0){ //first convert 0 (midnight) to 12. 
+        h =12; 
+       }
+       let session = "AM"; 
+       if (h>12){ //When the time is afternoon so converts session to PM, also convert h 
+        
+        session = "PM"; 
+        h = h-12 ; //When the time is exp : 14 -12= 2; 
+       }
+       //When h is less 10 add 0 to firts digit=> 09, 08, 07 
+       h = (h<10) ? "0" +h: h; 
+       m = (m<10)? "0"+m : m;
+       s = (s<10)? "0"+s :s; 
+
+       let time = h + ":" + m + ":"+s+ " "+ session; 
+       //GEt the element which you want to show your time 
+       document.getElementById("displayClock").innerHTML = time; 
+       setTimeout(showTime,100); 
+
+    }
+    showTime();
+</script>
+
+</body>
+</html>
